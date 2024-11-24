@@ -1,0 +1,46 @@
+-- Create a Database table to represent the "REVIEW" entity.
+CREATE TABLE REVIEW(
+	review_id	NUMBER(8),
+	review_text	LONG VARCHAR NOT NULL,
+	review_title VARCHAR(20) NOT NULL,
+	review_date DATE NOT NULL,
+	rate	NUMBER(5) NOT NULL,
+	fk_user_id	NUMBER(5) NOT NULL,
+	fk_product_id	NUMBER(8) NOT NULL,
+
+	-- Specify the PRIMARY KEY constraint for table "REVIEW".
+	CONSTRAINT	pk_REVIEW PRIMARY KEY (review_id),
+
+    -- Specify the PRIMARY KEY constraint for table "REVIEW".
+    FOREIGN KEY (fK_user_id) REFERENCES ALL_USER(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (fk_product_id) REFERENCES PRODUCT(product_id) ON DELETE SET NULL
+);
+
+
+CREATE SEQUENCE seq_review_id
+START WITH 1000
+INCREMENT BY 33;
+
+--creating trigger to generate primary keys(review_id) in REVIEW table
+COMMIT;
+CREATE OR REPLACE TRIGGER trigger_review_id
+BEFORE INSERT ON REVIEW
+FOR EACH ROW
+BEGIN 
+    IF :NEW.review_id IS NULL THEN
+        SELECT seq_review_id.NEXTVAL INTO :NEW.review_id FROM SYS.DUAL;
+    END IF;
+END;
+/
+
+-- creating trigger to generate date for REVIEW entity
+COMMIT;
+CREATE OR REPLACE TRIGGER trg_date_REVIEW
+BEFORE INSERT ON REVIEW
+FOR EACH ROW
+BEGIN
+  -- Set the value of ordered_date to the current date, without the time component
+  :NEW.review_date := TRUNC(SYSDATE);
+  
+END;
+/

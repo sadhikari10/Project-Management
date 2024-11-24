@@ -1,0 +1,10 @@
+1. Accounts
+2. Order
+3. Order_Product
+4. Payment
+5. Product
+6. Review
+7. Shop
+
+
+File Type: Notepad

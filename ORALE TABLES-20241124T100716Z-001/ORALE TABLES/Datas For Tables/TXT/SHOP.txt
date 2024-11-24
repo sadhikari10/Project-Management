@@ -1,0 +1,33 @@
+-- Create a Database table to represent the "SHOP" entity.
+CREATE TABLE SHOP(
+	shop_id	NUMBER(5),
+	shop_name	VARCHAR(40) NOT NULL,
+	shop_status	NUMBER(3) NOT NULL,  
+	shop_category  VARCHAR(40) NOT NULL,
+	user_id	NUMBER(10) NULL,
+
+	-- Specify the PRIMARY KEY constraint for table "SHOP".
+	CONSTRAINT	pk_SHOP PRIMARY KEY (shop_id),
+
+    -- Specify the FOREIGN KEY constraint for table "SHOP".
+    FOREIGN KEY (fk_user_id) REFERENCES ALL_USER(user_id) ON DELETE SET NULL
+);
+
+
+--CREATING A SEQUENCE
+CREATE SEQUENCE seq_shop_id
+START WITH 2
+INCREMENT BY 3;
+
+--creating trigger to generate primary keys(shop_id) in SHOP table
+COMMIT;
+CREATE OR REPLACE TRIGGER trigger_shop_id
+BEFORE INSERT ON SHOP
+FOR EACH ROW
+BEGIN 
+    IF :NEW.shop_id IS NULL THEN
+        SELECT seq_shop_id.NEXTVAL INTO :NEW.shop_id FROM SYS.DUAL;
+    END IF;
+END;
+/
+

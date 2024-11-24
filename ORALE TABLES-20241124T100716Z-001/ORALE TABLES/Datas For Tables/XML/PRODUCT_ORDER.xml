@@ -1,0 +1,48 @@
+-- Create a Database table to represent the "PRODUCT_ORDER" entity.
+CREATE TABLE PRODUCT_ORDER(
+	order_id	NUMBER(4),
+	ordered_date	DATE NOT NULL,
+	--ordered_time	TIMESTAMP NOT NULL,
+	status	NUMBER(3) NOT NULL,
+	quantity	NUMBER(2) NOT NULL,
+	total_cost	NUMBER(5) NOT NULL,
+	invoice_id NUMBER(10)	 NOT NULL UNIQUE,
+	fk_cart_id	NUMBER(6) NOT NULL,
+	fk_slot_id	NUMBER(5) NOT NULL,
+
+	-- Specify the PRIMARY KEY constraint for table "PRODUCT_ORDER".
+	CONSTRAINT	pk_PRODUCT_ORDER PRIMARY KEY (order_id),
+
+    -- Specify the FOREIGN KEY constraint for table "PRODUCT_ORDER".
+    FOREIGN KEY (fk_cart_id) REFERENCES CART(cart_id) ON DELETE SET NULL,
+    FOREIGN KEY (fk_slot_id) REFERENCES COLLECTION_SLOT(slot_id) ON DELETE SET NULL
+);
+
+
+CREATE SEQUENCE seq_order_id
+START WITH 6523
+INCREMENT BY 25
+MAXVALUE 900000;
+
+
+--creating trigger to generate primary keys(order_id) in PRODUCT_ORDER table
+COMMIT;
+CREATE OR REPLACE TRIGGER trigger_order_id
+BEFORE INSERT ON PRODUCT_ORDER
+FOR EACH ROW
+BEGIN 
+    IF :NEW.order_id IS NULL THEN
+        SELECT seq_order_id.NEXTVAL INTO :NEW.order_id FROM SYS.DUAL;
+    END IF;
+END;
+/
+-- creating trigger to generate date for PRODUCT_ORDER entity
+COMMIT;
+CREATE OR REPLACE TRIGGER trg_date_PRODUCT_ORDER
+BEFORE INSERT ON PRODUCT_ORDER
+FOR EACH ROW
+BEGIN
+  -- Set the value of ordered_date to the current date, without the time component
+  :NEW.ordered_date := TRUNC(SYSDATE);
+  
+END;

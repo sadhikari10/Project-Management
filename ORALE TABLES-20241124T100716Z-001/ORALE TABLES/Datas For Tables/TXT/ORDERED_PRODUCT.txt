@@ -1,0 +1,12 @@
+
+
+-- Create a Database table to represent the "ODERED_PRODUCT" entity.
+CREATE TABLE ORDERED_PRODUCT(
+	order_id	NUMBER(4) NOT NULL,
+	product_id	NUMBER(8) NOT NULL,
+    quantity NUMBER(8) NOT NULL,
+    
+    FOREIGN KEY (order_id) REFERENCES PRODUCT_ORDER(order_id),
+    FOREIGN KEY (product_id) REFERENCES PRODUCT(product_id)
+
+);

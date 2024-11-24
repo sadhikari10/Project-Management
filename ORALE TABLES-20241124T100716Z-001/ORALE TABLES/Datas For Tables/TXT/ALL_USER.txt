@@ -1,0 +1,49 @@
+-- Create a Database table to represent the "ALL_USER" entity.
+CREATE TABLE ALL_USER(
+    user_id NUMBER(5),
+    first_name VARCHAR(40) NOT NULL,
+    last_name VARCHAR(40) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL UNIQUE,
+    phone_no NUMBER(15) NOT NULL UNIQUE,
+    address VARCHAR(50) NOT NULL,
+    gender VARCHAR(50) NOT NULL,
+    age VARCHAR(20) NOT NULL,
+    date_created DATE NOT NULL,
+    image	VARCHAR(255),
+    role VARCHAR(20) NOT NULL,
+    verification_code VARCHAR(255) NOT NULL,
+    verify_status NUMBER(3) NOT NULL,
+
+    -- Specify the PRIMARY KEY constraint for table "ALL_USER".
+    CONSTRAINT	pk_ALL_USER PRIMARY KEY (user_id)
+);
+
+--creating trigger to generate primary keys(user_id) in all_user table
+COMMIT;
+CREATE OR REPLACE TRIGGER trigger_user_id
+BEFORE INSERT ON ALL_USER
+FOR EACH ROW
+BEGIN 
+    IF :NEW.user_id IS NULL THEN
+        SELECT seq_user_id.NEXTVAL INTO :NEW.user_id FROM SYS.DUAL;
+    END IF;
+END;
+/
+
+
+-- creating sequence
+CREATE SEQUENCE seq_user_id
+START WITH 100
+INCREMENT BY 2
+MAXVALUE 99999;
+
+-- creating trigger to generate date for ALL_USER entity
+COMMIT;
+CREATE OR REPLACE TRIGGER trg_date_All_USER
+BEFORE INSERT ON ALL_USER
+FOR EACH ROW
+BEGIN
+    :NEW.date_created := SYSDATE;
+END;
+/

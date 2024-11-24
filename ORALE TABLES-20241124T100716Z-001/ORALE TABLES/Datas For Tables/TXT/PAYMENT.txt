@@ -1,0 +1,44 @@
+-- Create a Database table to represent the "PAYMENT" entity.
+CREATE TABLE PAYMENT(
+	payment_id	NUMBER(7),
+	payment_amount NUMBER(10) NOT NULL,
+	currency	VARCHAR(8) NOT NULL,
+	payment_date	DATE NOT NULL,
+	payment_status	NUMBER(3) NOT NULL,
+	fK_user_id	NUMBER(5) NOT NULL,
+	fk_order_id	NUMBER(4) NOT NULL,
+
+	-- Specify the PRIMARY KEY constraint for table "PAYMENT".
+	CONSTRAINT	pk_PAYMENT PRIMARY KEY (payment_id),
+    
+    -- Specify the FOREIGN KEY constraint for table "PAYMENT".
+    FOREIGN KEY (fK_user_id) REFERENCES ALL_USER(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (FK_order_id) REFERENCES PRODUCT_ORDER(order_id) ON DELETE SET NULL
+
+);
+
+CREATE SEQUENCE seq_payment_id
+START WITH 8000
+INCREMENT BY 7
+MAXVALUE 9000002;
+
+--creating trigger to generate primary keys(payment_id) in PAYMENT table
+COMMIT;
+CREATE OR REPLACE TRIGGER trigger_payment_id
+BEFORE INSERT ON PAYMENT
+FOR EACH ROW
+BEGIN 
+    IF :NEW.payment_id IS NULL THEN
+        SELECT seq_payment_id.NEXTVAL INTO :NEW.payment_id FROM SYS.DUAL;
+    END IF;
+END;
+
+-- creating trigger to generate date for PAYMENT entity
+COMMIT;
+CREATE OR REPLACE TRIGGER trg_date_PAYMENT
+BEFORE INSERT ON PAYMENT
+FOR EACH ROW
+BEGIN
+    :NEW.payment_date := SYSDATE;
+END;
+/

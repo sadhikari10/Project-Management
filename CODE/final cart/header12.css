@@ -1,0 +1,530 @@
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden; /* Disable horizontal scroll */
+}
+
+
+
+
+
+
+
+
+/*starting of header*/
+
+.header {
+    width: 100%;
+    height: 85px; /* Reduced height */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px; /* Adjusted padding */
+    box-sizing: border-box; /* Ensure padding is included in height */
+}
+
+
+
+
+/* Logo Styles */
+.logo img {
+    mix-blend-mode: multiply;
+    height: 35px; /* Reduced logo size */
+    width: 30px; /* Reduced logo size */
+    margin: 0 10px; /* Adjusted margin */
+    /*filter: drop-shadow(0 0 8px rgba(0, 128, 128, 0.5));  Reduced shadow */
+   /* background: linear-gradient(45deg, #ffcc00, #ff6699);  Gradient overlay */
+   /* border: 2px solid #fff;  Border around the logo */
+   /* transition: transform 0.3s, filter 0.3s, box-shadow 0.3s, opacity 0.3s;  Transition for transform, filter, box-shadow, and opacity */
+  /*  opacity: 1;  Initial opacity */
+}
+
+.logo img:hover {
+    mix-blend-mode: multiply;
+    transform: scale(1.5); /* Scale up on hover */
+   /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  Text shadow on hover */
+   /*  box-shadow: 0 0 20px rgba(0, 128, 128, 0.8); Glow effect on hover */
+  /*   opacity: 0.7; Reduced opacity on hover */
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 50px;
+    padding: 5px;
+    border: 2px solid rgba(0, 128, 128, 0.5);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: moveSearch 10s linear infinite;
+    margin: 5px;
+    position: relative;
+}
+
+.search-container:hover .search-form {
+    /* transform: scaleX(4.5) translateX(-10%); */
+    box-shadow: 0 0 20px rgba(0, 153, 169, 0.8);
+}
+
+.search-form input {
+    padding: 8px;
+    border: none;
+    border-radius: 50px;
+    margin-right: 10px;
+    font-size: 14px;
+    width: 200px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: transparent;
+}
+
+.search-form input:focus {
+    background: transparent;
+    outline: none;
+}
+
+.search-form input:hover {
+    transform: translateY(-3px) scale(1.03);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: bold;
+}
+
+.search-button {
+    border: none;
+    background-color: #008080;
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 8px 12px;
+    color: white;
+    font-size: 16px;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    box-shadow: inset 0 0 16px rgba(0,0,0,0.3);
+    margin-left: auto; /* Aligns the button to the right inside the flex container */
+}
+
+.search-button i {
+    font-size: 18px;
+}
+
+.search-button:hover {
+    background-color: #0053a3;
+    box-shadow: 
+        inset 0 0 10px rgba(0,0,0,0.6),
+        0 0 10px 5px rgba(255, 255, 255, 0.3),
+        0 0 40px 30px rgba(255, 255, 255, 0.1),
+        0 0 70px 50px rgba(255, 255, 255, 0.1),
+        0 0 100px 70px rgba(255, 255, 255, 0.1);
+    transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+.auth-container {
+    margin-right: 80px; /* Adjust this value as needed */
+}
+
+
+.auth-links {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.auth-links ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.auth-links .dropdowns {
+    position: relative;
+    margin: 8px;
+}
+
+.auth-links .dropdowns > a {
+    background-color: rgba(0, 128, 128, 0.5);
+    border: none;
+    border-radius: 10px;
+    padding: 8px;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+.auth-links .dropdowns:hover > a {
+    background-color: #009999;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.auth-links .dropdowns-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.auth-links .dropdowns-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.auth-links .dropdowns:hover .dropdowns-content {
+    display: block;
+}
+
+.cart-icon button {
+    /* position: absolute; */
+    /* top: 49px; Adjust this value to change the distance from the top */
+    /* right: 50px; Adjust this value to change the distance from the right */
+    /* background-color: black; Semi-transparent background */
+    border: none;
+    border-radius: 50%;
+    color: purple; /* Text color */
+    font-size: 18px;
+    cursor: pointer;
+    /* overflow: hidden; */
+    /* transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s; Transition effect */
+    /* box-shadow: inset 0 0 10px rgba(0,0,0,0.3); 3D effect */
+    margin: 2px;
+    background-color: red; /* Darker background color on hover */
+    transform: translateY(-3px) scale(1.05); /* Move button up and zoom on hover */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.6); /* Increased shadow on hover for deeper 3D effect */
+}
+
+/* .cart-icon button:hover {
+    background-color: red; /* Darker background color on hover */
+    /* transform: translateY(-3px) scale(1.05); Move button up and zoom on hover */
+    /* box-shadow: inset 0 0 10px rgba(0,0,0,0.6); Increased shadow on hover for deeper 3D effect */
+/* } */ 
+
+.cart-icon button i {
+    padding: 2px;
+    margin: 5px; /* Add margin to separate the search bar from the upper elements */
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .search-form input {
+        width: 150px; /* Adjusted width for smaller screens */
+    }
+}
+
+
+
+  /*end of header style*/
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Navbar Styles */
+.navbar {
+    background: radial-gradient(#fff,#F5F5DC);
+    color: black;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.navbar li {
+    margin-right: 20px;
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+    padding: 8px 16px; /* Adjusted padding for space between icon and text */
+    transition: color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    border: 1px solid transparent; /* Add border around each item */
+    border-radius: 5px; /* Rounded corners */
+    display: flex;
+    align-items: center; /* Center icon and text vertically */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Initial box shadow for 3D effect */
+}
+
+.navbar a:hover {
+    /* background: linear-gradient(90deg, rgba(0, 128, 128, 0.5), rgba(0, 128, 128, 0.5)); Aqua gradient */
+    color: black; /* Change text color to white */
+    transform: translateY(-3px) scale(1.05); /* Move link up and zoom on hover */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Increase box shadow on hover for more 3D effect */
+    border-color: #fff; /* Add border color on hover */
+}
+
+.dropdowns {
+    position: relative;
+}
+
+.dropdowns-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(249, 235, 235);
+    min-width: 160px;
+    z-index: 1;
+    left: 0; /* Align dropdown to the left */
+}
+
+.dropdowns:hover .dropdowns-content {
+    display: block; /* Change to block display to make it appear vertically */
+    top: 100%; /* Position the dropdown below its parent */
+}
+
+/* Added style for the gap */
+.navbar .gap {
+    margin-right: 10px; /* Adjusted gap between icon and text */
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    .navbar ul {
+        margin-bottom: 10px; /* Add space between each list on smaller screens */
+    }
+
+    .navbar li {
+        margin-right: 0; /* Remove right margin on smaller screens */
+        margin-bottom: 10px; /* Add bottom margin for space between items */
+    }
+
+    .navbar a {
+        width: 100%; /* Make navbar links full width on smaller screens */
+    }
+
+    .navbar .gap {
+        display: none; /* Hide the gap on smaller screens */
+    }
+}
+
+/*end of nav bar styles*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer Styles */
+footer {
+    /* background: linear-gradient(45deg, rgba(240, 128, 128, 0.2) 0%, rgba(50, 50, 50, 0.9) 25%, rgba(20, 20, 20, 0.9) 75%, rgba(240, 128, 128, 0.2) 100%); */
+    color: #darkred;
+    padding: 10px 0; /* Reduce vertical padding */
+    text-align: center;
+    width: 100%;
+    z-index: -1;
+    background-color: black;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 5px; /* Reduce margin */
+    border: 1px solid #fff; 
+    padding: 5px; /* Reduce padding */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.footer-heading {
+    font-size: 1rem; /* Reduce font size */
+    margin-bottom: 5px; /* Reduce margin */
+}
+
+.footer-links {
+    list-style-type: none;
+    padding: 0;
+    color: aqua;
+    column-count: 2; 
+    column-gap: 10px; /* Reduce gap between columns */
+}
+
+.footer-links li {
+    margin-bottom: 5px; /* Reduce margin between links */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social-media-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Reduce top margin */
+}
+
+.social-media-icons a {
+    margin: 0 5px; /* Reduce spacing between icons */
+    transition: transform 0.3s, box-shadow 0.3s; /* Add transition */
+}
+
+.social-media-icons a:hover {
+    transform: scale(1.1); /* Scale up effect */
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5); /* Glow effect */
+}
+
+.payment-methods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px; /* Reduce top margin */
+}
+
+.payment-methods img {
+    width: 30px; /* Reduce icon size */
+    margin: 0 5px; /* Reduce spacing between icons */
+}
+
+.footer-links li a {
+    color: darkcyan; 
+    position: relative;
+    text-decoration: none;
+}
+
+.footer-links li a::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: darkcyan;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.footer-links li:hover {
+    transform: scale(1.1); /* Scale up effect */
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5); /* Glow effect */
+}
+
+.footer-links li a:hover::before {
+    transform: scaleX(1);
+}
+
+.footer-links li a:hover {
+    color: #ffcc00; /* Change to desired hover color */
+}
+
+/* Categories, Website Name, Follow Us, and Payment Methods */
+.categories,
+.website-name,
+.follow-us,
+.payment-methods {
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.categories:hover,
+.website-name:hover,
+.follow-us:hover,
+.payment-methods:hover,
+.footer-section:hover {
+    transform: scale(1.1); /* Scale up effect */
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5); /* Glow effect */
+}
